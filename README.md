@@ -1,13 +1,56 @@
-# Prodigal Failures
+# Podcast Site Template
 
 A simple, minimal podcast website built with **Next.js (App Router)**, **TypeScript**,
-and **Tailwind CSS**. Episodes are pulled live from the show's RSS feed; there's an
+and **Tailwind CSS**. Episodes are pulled live from your show's RSS feed; there's an
 About page, a full Archive, and a Resend-powered contact form.
 
+It ships with placeholder content **and ten built-in sample episodes** so the site
+looks fully populated out of the box — point it at your feed, fill in your details,
+and you have a working show site.
+
 - **Home** (`/`) — featured latest episode, recent episodes, and "Listen on" links.
-- **About** (`/about`) — host bios for Craig and Andy.
+- **About** (`/about`) — host bios.
 - **Archive** (`/archive`) — every episode from the feed, newest first.
 - **Contact** (`/contact`) — contact form that posts to an API route (Resend).
+
+---
+
+## Sample episodes (and switching to a real feed)
+
+Out of the box, `siteConfig.useSampleEpisodes` is set to **`true`**, so the Home and
+Archive pages render ten made-up sample episodes from
+[`src/config/sampleEpisodes.ts`](src/config/sampleEpisodes.ts) (with placeholder cover
+art in [`public/sample/`](public/sample)). **No network request is made** in this mode —
+it's purely a mockup so you can see the layout before connecting a feed.
+
+### Go live with your own feed
+
+1. Open `src/config/site.ts` and set your real feed URL:
+
+   ```ts
+   feedUrl: "https://your-host.com/your-podcast/feed.xml",
+   ```
+
+2. In the same file, turn the sample data **off**:
+
+   ```ts
+   useSampleEpisodes: false,
+   ```
+
+   The site will now fetch and display live episodes from `feedUrl`.
+
+3. **(Optional) Delete the sample data** once you no longer need it:
+
+   ```bash
+   rm src/config/sampleEpisodes.ts
+   rm -r public/sample
+   ```
+
+   This is safe as long as `useSampleEpisodes` is `false` — the sample module is
+   only loaded when the flag is `true`.
+
+> Want to tweak the mockup instead of removing it? Edit the episodes (titles,
+> descriptions, dates, cover images) directly in `src/config/sampleEpisodes.ts`.
 
 ---
 
@@ -24,24 +67,27 @@ Almost everything you'll want to change routinely lives in **one file**:
 | SEO description | `siteConfig.description` |
 | **RSS feed URL** | `siteConfig.feedUrl` |
 | "Listen on" platform links | `siteConfig.platforms` (edit the `href`s) |
-| **Host bios (Craig & Andy)** | `hosts` array — `name`, `image`, `bio` |
+| **Host bios** | `hosts` array — `name`, `image`, `bio` (add/remove entries per host) |
+
+The home page heading and the About page intro are generated from these values,
+so updating the config updates them everywhere.
 
 ### Host headshots
 
-Bio images live in `public/hosts/` (currently `craig.svg` and `andy.svg`,
+Bio images live in `public/hosts/` (currently `host-1.svg` and `host-2.svg`,
 placeholders). To use real photos, drop image files into `public/hosts/` and point
-each host's `image` field in `src/config/site.ts` at them, e.g. `/hosts/craig.jpg`.
+each host's `image` field in `src/config/site.ts` at them, e.g. `/hosts/host-1.jpg`.
 
 ---
 
 ## Adding / changing the RSS feed URL
 
-The site reads all episode data (titles, descriptions, artwork, dates, listen links)
-from a single RSS feed. To change it, edit **`siteConfig.feedUrl`** in
-`src/config/site.ts`:
+When `useSampleEpisodes` is `false` (see above), the site reads all episode data
+(titles, descriptions, artwork, dates, listen links) from a single RSS feed. To change
+it, edit **`siteConfig.feedUrl`** in `src/config/site.ts`:
 
 ```ts
-feedUrl: "https://media.rss.com/prodigal-failures/feed.xml",
+feedUrl: "https://example.com/your-podcast/feed.xml",
 ```
 
 The feed is fetched server-side and cached, revalidating **once per hour**

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" role="img" aria-label="Sample episode cover">
+  <rect width="600" height="600" fill="#ffc93c"/>
+  <circle cx="300" cy="300" r="150" fill="#ff2e88" stroke="#181527" stroke-width="10"/>
+  <path d="M300 230l60 104H240z" fill="#06c7b5" stroke="#181527" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M70 90q30-40 60 0t60 0" fill="none" stroke="#9b51e0" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="500" cy="110" r="26" fill="#15a0e8" stroke="#181527" stroke-width="8"/>
+  <g fill="#181527"><circle cx="90" cy="500" r="9"/><circle cx="130" cy="500" r="9"/><circle cx="170" cy="500" r="9"/><circle cx="90" cy="540" r="9"/><circle cx="130" cy="540" r="9"/><circle cx="170" cy="540" r="9"/></g>
+  <path d="M470 470l40 70h-80z" fill="#ff6b35" stroke="#181527" stroke-width="8" stroke-linejoin="round"/>
+</svg>

@@ -82,12 +82,25 @@ export function excerpt(text: string, maxLength = 180): string {
 }
 
 export async function getFeed(): Promise<FeedResult> {
+  // Sample-data mode: skip the network entirely and serve the bundled
+  // placeholder episodes (see src/config/sampleEpisodes.ts). Toggle this off
+  // in src/config/site.ts once you've set a real feedUrl.
+  if (siteConfig.useSampleEpisodes) {
+    const { sampleEpisodes } = await import("@/config/sampleEpisodes");
+    return {
+      podcastTitle: siteConfig.name,
+      podcastImage: sampleEpisodes[0]?.image ?? null,
+      episodes: sampleEpisodes,
+      error: false,
+    };
+  }
+
   try {
     // Fetch the raw XML ourselves so we can use Next's fetch caching /
     // revalidation, then hand the string to rss-parser.
     const res = await fetch(siteConfig.feedUrl, {
       next: { revalidate: REVALIDATE_SECONDS },
-      headers: { "User-Agent": "ProdigalFailuresSite/1.0 (+rss-reader)" },
+      headers: { "User-Agent": "PodcastSite/1.0 (+rss-reader)" },
     });
 
     if (!res.ok) {
