@@ -13,22 +13,34 @@
 
 export const siteConfig = {
   /** Podcast name — shown in the header logo, footer, and page titles. */
-  name: "Prodigal Failures",
+  name: "Your Podcast",
 
   /** One-line tagline shown under the name on the home page. */
-  tagline: "Unpacking the faith that raised us — one episode at a time.",
+  tagline: "A short, catchy tagline that describes your show.",
 
   /** Longer description used for SEO / metadata. */
   description:
-    "Prodigal Failures is an honest, funny podcast about growing up evangelical, deconstructing faith, and who we became after we left.",
+    "Your Podcast is a show about the things you care about. Replace this " +
+    "description with a sentence or two about what listeners can expect.",
+
+  /**
+   * Show the bundled sample episodes instead of fetching a live RSS feed.
+   *
+   * This ships as `true` so the Home and Archive pages look populated out of
+   * the box. When you're ready to go live, set this to `false` and point
+   * `feedUrl` below at your real feed. See the README for the full checklist
+   * (and how to delete the sample data).
+   */
+  useSampleEpisodes: true,
 
   /**
    * The podcast RSS feed URL. Episodes (titles, descriptions, artwork, dates,
    * and listen links) are parsed from this feed server-side.
    *
-   * To change the feed, just replace the URL below.
+   * Only used when `useSampleEpisodes` is `false`. To change the feed, just
+   * replace the URL below.
    */
-  feedUrl: "https://media.rss.com/prodigal-failures/feed.xml",
+  feedUrl: "https://example.com/your-podcast/feed.xml",
 
   /**
    * "Listen on" links to distribution platforms.
@@ -38,34 +50,35 @@ export const siteConfig = {
   platforms: [
     { name: "Apple Podcasts", href: "https://podcasts.apple.com/" },
     { name: "Spotify", href: "https://open.spotify.com/" },
-    { name: "YouTube", href: "https://youtube.com/@prodigalfailures" },
-    { name: "RSS.com", href: "https://media.rss.com/prodigal-failures/feed.xml" },
+    { name: "YouTube", href: "https://youtube.com/" },
+    { name: "RSS", href: "https://example.com/your-podcast/feed.xml" },
   ],
 } as const;
 
 // ---------------------------------------------------------------------------
 // HOST BIOS — shown on /about. Edit text + headshot image paths here.
-// Headshots live in /public (so e.g. "/hosts/craig.svg" => public/hosts/craig.svg).
+// Headshots live in /public (so e.g. "/hosts/host-1.svg" => public/hosts/host-1.svg).
 // Drop in real images and update the `image` path to match.
+//
+// Add or remove entries to match the number of hosts on your show.
 // ---------------------------------------------------------------------------
 
 export const hosts = [
   {
-    name: "Andy",
-    image: "/hosts/andy.svg",
+    name: "Host One",
+    image: "/hosts/host-1.svg",
     bio:
-      "Andy is one half of Prodigal Failures. This is placeholder bio " +
-      "text — replace it with Andy's real introduction. Add a couple of " +
-      "sentences about who he is, why he co-hosts the show, and his particular " +
-      "brand of cautionary tale.",
+      "This is placeholder bio text — replace it with this host's real " +
+      "introduction. Add a couple of sentences about who they are, why they " +
+      "host the show, and what they bring to it.",
   },
   {
-    name: "Craig",
-    image: "/hosts/craig.svg",
+    name: "Host Two",
+    image: "/hosts/host-2.svg",
     bio:
-      "Craig grew up as a third-generation kid in a a baptist church from the time he was born, surrounded by his extended family. " + 
-      "He went on missions trips, led worship in youth group and Sunday mornings, and even met his wife in the church he was raised in. " + 
-      "Now he's figuring out how to work through the religious wounds of his youth that caused him to walk away from his early beliefs.",
+      "This is placeholder bio text — replace it with this host's real " +
+      "introduction. Add a couple of sentences about who they are, why they " +
+      "host the show, and what they bring to it.",
   },
 ] as const;
 

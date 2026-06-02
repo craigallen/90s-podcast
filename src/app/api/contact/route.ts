@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     // ever changes: https://resend.com/docs/send-with-nodejs
     // -----------------------------------------------------------------------
     const { data, error } = await resend.emails.send({
-      from: "Prodigal Failures <onboarding@resend.dev>", // TODO: replace with your verified sender
+      from: "Your Podcast <onboarding@resend.dev>", // TODO: replace with your verified sender
       to: ["you@example.com"], // TODO: replace with your destination inbox
       replyTo: email,
       subject: `New contact form message from ${name}`,

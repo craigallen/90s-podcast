@@ -14,6 +14,11 @@ export default async function HomePage() {
   const [featured, ...rest] = episodes;
   const recent = rest.slice(0, 6);
 
+  // Render the configured podcast name as a chunky two-tone wordmark, cycling
+  // accent colors across its words so it works for any name.
+  const nameWords = siteConfig.name.split(" ");
+  const titleAccents = ["text-magenta", "text-purple", "text-teal", "text-orange"];
+
   return (
     <div className="flex flex-col gap-16">
       {/* Hero */}
@@ -25,8 +30,12 @@ export default async function HomePage() {
         <Star className="pointer-events-none absolute left-1/2 -top-4 -z-10 hidden h-12 w-12 text-magenta sm:block" />
 
         <h1 className="display text-5xl uppercase leading-[0.95] text-ink sm:text-7xl">
-          <span className="text-magenta">Prodigal</span>{" "}
-          <span className="text-purple">Failures</span>
+          {nameWords.map((word, i) => (
+            <span key={i} className={titleAccents[i % titleAccents.length]}>
+              {word}
+              {i < nameWords.length - 1 ? " " : ""}
+            </span>
+          ))}
         </h1>
         <ZigZag className="mt-3 h-5 w-56 text-orange" />
         <p className="mt-5 max-w-2xl text-lg font-medium text-ink/80">
